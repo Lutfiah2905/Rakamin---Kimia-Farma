@@ -1,0 +1,12 @@
+-- Membuat tabel_analisa untuk menggabungkan transaksi dengan informasi cabang
+CREATE OR REPLACE TABLE `r-kimia-farma-analytics.kimia_farma.tabel_analisa` AS
+SELECT 
+    t.transaction_id,      -- ID unik transaksi
+    t.date,                -- Tanggal transaksi
+    t.branch_id,           -- ID cabang Kimia Farma
+    c.branch_name,         -- Nama cabang
+    c.kota,                -- Kota cabang
+    c.provinsi             -- Provinsi cabang
+FROM `r-kimia-farma-analytics.kimia_farma.kf_final_transaction` t
+LEFT JOIN `r-kimia-farma-analytics.kimia_farma.kf_kantor_cabang` c
+    ON t.branch_id = c.branch_id;
